@@ -1,0 +1,19 @@
+def myrange(start=0,stop=None,step=1):
+    if step==0:
+        raise ValueError("range() arg 3 must not be zero")
+    else:
+        if stop == None :
+            stop=start
+            start=0
+        i= start
+        if start<stop:
+            while i < stop:
+             yield i
+             i = i+ step
+
+        if start>stop:
+            while i > stop:
+             yield i
+             i = i+ step
+   
+myrange()
