@@ -1,4 +1,3 @@
-import os
 import random
 
 def triangle_generator(p1,p2,p3):
