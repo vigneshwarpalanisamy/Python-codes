@@ -1,0 +1,25 @@
+import os
+import random
+
+def triangle_generator(p1,p2,p3):
+    for i in range(0,100):
+        alpha=random.random()
+        beta=(1-alpha)*alpha
+        gamma=1-alpha-beta
+
+        x=alpha*p1[0]+ beta*p2[0]+ gamma*p3[0]
+        y=alpha*p1[1]+ beta*p2[1]+ gamma*p3[1]
+        z=alpha*p1[2]+ beta*p2[2]+ gamma*p3[2]
+        
+
+        yield (x,y,z)
+
+
+a=next(triangle_generator((0,0,0),(1,0,0),(0,1,0)))
+print(a)
+
+
+with open("triangle.csv", "w+") as f:
+    for i in (triangle_generator((0,0,0),(1,0,0),(0,1,0))):
+        i=list(i)
+        f.write(f"{i[0]},{i[1]},{i[2]}\n")
