@@ -1,9 +1,9 @@
 import random
 
 def triangle_generator(p1,p2,p3):
-    for i in range(0,100):
+    while True:
         alpha=random.random()
-        beta=(1-alpha)*alpha
+        beta=(1-alpha)*random.random()
         gamma=1-alpha-beta
 
         x=alpha*p1[0]+ beta*p2[0]+ gamma*p3[0]
@@ -14,11 +14,11 @@ def triangle_generator(p1,p2,p3):
         yield (x,y,z)
 
 
-a=next(triangle_generator((0,0,0),(1,0,0),(0,1,0)))
-print(a)
 
 
 with open("triangle.csv", "w+") as f:
-    for i in (triangle_generator((0,0,0),(1,0,0),(0,1,0))):
-        i=list(i)
-        f.write(f"{i[0]},{i[1]},{i[2]}\n")
+    a=triangle_generator((0,0,0),(1,0,0),(0,1,0))
+    for i in range(10000):
+        x,y,z=next(a)
+        f.write(f"{x},{y},{z}\n")
+
