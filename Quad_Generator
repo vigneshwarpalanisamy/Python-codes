@@ -1,0 +1,55 @@
+#author: vigneshwar
+import random
+
+def triangle_generator(p1,p2,p3):
+    while True:
+        alpha=random.random()
+        beta=(1-alpha)*random.random()
+        gamma=1-alpha-beta
+
+        x=alpha*p1[0]+ beta*p2[0]+ gamma*p3[0]
+        y=alpha*p1[1]+ beta*p2[1]+ gamma*p3[1]
+        z=alpha*p1[2]+ beta*p2[2]+ gamma*p3[2]
+        
+
+        yield (x,y,z)
+
+
+def quad(p1,p2,p3,p4):
+    a=[p1,p2,p3,p4]
+    
+    x1,y1,z1=p1
+    x2,y2,z2=p1
+    x3,y3,z3=p1
+    x4,y4,z4=p1
+
+    for i in a:
+        if i[0]<= x1 and i[1]<= y1 and i[2]<=z1:
+            x1,y1,z1=i
+        if i[0]>= x2 and i[1]<= y2 and i[2]<=z2:
+            x2,y2,z2=i
+        if i[0]<= x3 and i[1]>= y3 and i[2]<=z3:
+            x3,y3,z3=i   
+        if i[0]>= x4 and i[1]>= y4  and i[2]>=z4:
+            x4,y4,z4=i
+            
+    p1=[x1,y1,z1]
+    p2=[x2,y2,z2]
+    p3=[x3,y3,z3]
+    p4=[x4,y4,z4]
+    
+    tri1=triangle_generator(p1,p4,p3)
+    tri2=triangle_generator(p1,p2,p4)
+
+    while True:
+        yield next(tri1)
+        yield next(tri2)
+
+
+
+with open("triangle.csv", "w+") as f:
+    a=quad((0,0,0),(0,1,0),(1,1,0),(1,0,0))
+    for i in range(10000):
+        x,y,z=next(a)
+        f.write(f"{x},{y},{z}\n")
+
